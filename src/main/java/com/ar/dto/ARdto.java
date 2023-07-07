@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class ARdto {
 	
+	private Long appId;
 	private String fullName;
 	private String email;
 	private String phoneNo;

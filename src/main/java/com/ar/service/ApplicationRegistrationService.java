@@ -1,5 +1,8 @@
 package com.ar.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -70,5 +73,25 @@ public class ApplicationRegistrationService  implements IApplicationRegistration
 			else
 				throw new InvalidSsnException(AppConstants.INVALID_SSN);
 
+	}
+
+
+	@Override
+	public List<ARdto> getAllApplicants() {
+		log.info("getAllApplicants");
+		
+		List<ApplicationRegistration> allApp= appRegRepo.findAll();
+		List<ARdto> ArDtos = new ArrayList<>();
+		
+		ARdto arDto ;
+		
+		for(ApplicationRegistration arEntity : allApp) {
+			arDto = new ARdto();
+			
+			BeanUtils.copyProperties(arEntity, arDto);
+			ArDtos.add(arDto);
+		}
+		
+		return ArDtos;
 	}
 }
